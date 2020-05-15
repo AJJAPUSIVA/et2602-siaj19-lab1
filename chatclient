@@ -13,3 +13,29 @@ if len(sys.argv)!=3:
 my_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 my_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+Info = (sys.argv[1])
+a=Info.split(':')
+IP_addr=str(a[0])
+port=int(a[1])
+nick=str(sys.argv[2])
+
+
+my_server.connect((IP_addr, port))
+
+first_msg=my_server.recv(2048).decode('utf-8')
+
+print(first_msg)
+
+nick = 'NICK ' + nick
+
+
+my_server.sendall(nick.encode('utf-8'))
+
+ok_msg=my_server.recv(2048).decode('utf-8')
+print(ok_msg)
+if ok_msg == "OK":
+    pass
+elif ok_msg == "ERR malformed nick name":
+    print('nick name with special characters are not valid,limit upto 12 characters')
+    print('disconnecting for now, try with valid nickname')
+    sys.exit()

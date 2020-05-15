@@ -9,5 +9,5 @@ if len(sys.argv)!=2:
     print("Input format be = ./chatserver ip:port ")
     sys.exit()
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+my_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+my_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
